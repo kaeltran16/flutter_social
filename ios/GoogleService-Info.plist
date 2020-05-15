@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>41457948560-8mkm09g8eb69k9dtqqn3dbj09n46h9f3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.41457948560-8mkm09g8eb69k9dtqqn3dbj09n46h9f3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBNQF-X1UOAjgAbOQjm2g_9xN9YNfom4Z4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>41457948560</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.kaelpg.social</string>
+	<key>PROJECT_ID</key>
+	<string>flutter-social-92a57</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flutter-social-92a57.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:41457948560:ios:c3d94116b6eb217b16c515</string>
+	<key>DATABASE_URL</key>
+	<string>https://flutter-social-92a57.firebaseio.com</string>
+</dict>
+</plist>
