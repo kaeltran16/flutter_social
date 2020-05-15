@@ -10,10 +10,19 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-        		<key>CFBundleTypeRole</key>
-        		<string>Editor</string>
-        		<key>CFBundleURLSchemes</key>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+			<!-- TODO Replace this value: -->
+			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
         		<string>com.googleusercontent.apps.41457948560-8mkm09g8eb69k9dtqqn3dbj09n46h9f3</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleName</key>
 	<string>flutter_social</string>
 	<key>CFBundlePackageType</key>
