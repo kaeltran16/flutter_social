@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 
-header() {
-  return Text("header");
+AppBar header(context, {bool isAppTitle = false, String titleText}) {
+  return AppBar(
+    title: Text(
+      isAppTitle ? 'FlutterSocial' : titleText,
+      style: TextStyle(
+          color: Colors.white,
+          fontFamily: isAppTitle ? 'Signatra' : '',
+          fontSize: isAppTitle ? 50 : 24),
+    ),
+    centerTitle: true,
+    backgroundColor: Theme.of(context).accentColor,
+  );
 }
