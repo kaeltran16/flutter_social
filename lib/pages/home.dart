@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social/models/user.dart';
@@ -11,7 +12,9 @@ import 'package:flutter_social/pages/upload.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
+final StorageReference storageRef = FirebaseStorage.instance.ref();
 final userRef = Firestore.instance.collection('users');
+final postRef = Firestore.instance.collection('posts');
 final DateTime timeStamp = DateTime.now();
 User currentUser;
 
@@ -83,40 +86,36 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildAuthScreen() {
-    return RaisedButton(
-      child: Text('Click'),
-      onPressed: onLogout,
+    return Scaffold(
+      body: PageView(
+        children: <Widget>[
+          Timeline(),
+          ActivityFeed(),
+          Upload(currentUser: currentUser),
+          Search(),
+          Profile()
+        ],
+        controller: pageController,
+        onPageChanged: onPageChange,
+        physics: NeverScrollableScrollPhysics(),
+      ),
+      bottomNavigationBar: CupertinoTabBar(
+        currentIndex: 0,
+        onTap: onTap,
+        activeColor: Theme.of(context).primaryColor,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),
+          BottomNavigationBarItem(
+              icon: Icon(
+            Icons.photo_camera,
+            size: 35,
+          )),
+          BottomNavigationBarItem(icon: Icon(Icons.search)),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle)),
+        ],
+      ),
     );
-    // return Scaffold(
-    //   body: PageView(
-    //     children: <Widget>[
-    //       Timeline(),
-    //       ActivityFeed(),
-    //       Upload(),
-    //       Search(),
-    //       Profile()
-    //     ],
-    //     controller: pageController,
-    //     onPageChanged: onPageChange,
-    //     physics: NeverScrollableScrollPhysics(),
-    //   ),
-    //   bottomNavigationBar: CupertinoTabBar(
-    //     currentIndex: 0,
-    //     onTap: onTap,
-    //     activeColor: Theme.of(context).primaryColor,
-    //     items: [
-    //       BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
-    //       BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),
-    //       BottomNavigationBarItem(
-    //           icon: Icon(
-    //         Icons.photo_camera,
-    //         size: 35,
-    //       )),
-    //       BottomNavigationBarItem(icon: Icon(Icons.search)),
-    //       BottomNavigationBarItem(icon: Icon(Icons.account_circle)),
-    //     ],
-    //   ),
-    // );
   }
 
   onLogin() {
