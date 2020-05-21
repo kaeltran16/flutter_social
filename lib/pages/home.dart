@@ -69,7 +69,8 @@ class _HomeState extends State<Home> {
         'photoUrl': user.photoUrl,
         'email': user.email,
         'displayName': user.displayName,
-        'timeStamp': timeStamp
+        'timeStamp': timeStamp,
+        'bio': ''
       });
 
       doc = await userRef.document(user.id).get();
@@ -93,7 +94,7 @@ class _HomeState extends State<Home> {
           ActivityFeed(),
           Upload(currentUser: currentUser),
           Search(),
-          Profile()
+          Profile(profileId: currentUser?.id)
         ],
         controller: pageController,
         onPageChanged: onPageChange,
