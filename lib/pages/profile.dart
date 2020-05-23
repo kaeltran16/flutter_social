@@ -22,7 +22,7 @@ class _ProfileState extends State<Profile> {
   final String currentUserId = currentUser.id;
   bool isLoading = false;
   int postCount = 0;
-  String postOrientation = 'grid';
+  String postOrientation = 'list';
   List<Post> posts = [];
   @override
   void initState() {

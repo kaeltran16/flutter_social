@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social/models/user.dart';
+import 'package:flutter_social/pages/comments.dart';
 import 'package:flutter_social/pages/home.dart';
 import 'package:flutter_social/widgets/custom_image.dart';
 import 'package:flutter_social/widgets/progress.dart';
@@ -182,7 +183,8 @@ class _PostState extends State<Post> {
                 size: 28,
                 color: Colors.blue[900],
               ),
-              onTap: () => print('showing comment'),
+              onTap: () => showComments(context,
+                  postId: postId, ownerId: ownerId, mediaUrl: mediaUrl),
             ),
           ],
         ),
@@ -251,4 +253,12 @@ class _PostState extends State<Post> {
       ],
     );
   }
+}
+
+showComments(BuildContext context,
+    {String postId, String ownerId, String mediaUrl}) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return Comments(
+        postId: postId, postOwnerId: ownerId, postMediaUrl: mediaUrl);
+  }));
 }
