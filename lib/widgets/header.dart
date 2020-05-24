@@ -8,6 +8,7 @@ AppBar header(context,
     automaticallyImplyLeading: !removeBackButton,
     title: Text(
       isAppTitle ? 'FlutterSocial' : titleText,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
           color: Colors.white,
           fontFamily: isAppTitle ? 'Signatra' : '',
