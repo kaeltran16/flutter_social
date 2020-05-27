@@ -164,6 +164,70 @@ class _PostState extends State<Post> {
     }
   }
 
+  deletePost() async {
+    postRef
+        .document(ownerId)
+        .collection('userPosts')
+        .document(postId)
+        .get()
+        .then((doc) {
+      if (doc.exists) {
+        doc.reference.delete();
+      }
+    });
+
+    storageRef.child('post_$postId.jpg').delete();
+    QuerySnapshot activitySnapshot = await activityFeedRef
+        .document(ownerId)
+        .collection('feedItems')
+        .where('postId', isEqualTo: postId)
+        .getDocuments();
+
+    activitySnapshot.documents.forEach((doc) {
+      if (doc.exists) {
+        doc.reference.delete();
+      }
+    });
+
+    QuerySnapshot commentSnapshot =
+        await commentRef.document(postId).collection('comments').getDocuments();
+    commentSnapshot.documents.forEach((doc) {
+      if (doc.exists) {
+        doc.reference.delete();
+      }
+    });
+  }
+
+  onDeletePost(BuildContext parentCxt) {
+    return showDialog(
+        context: parentCxt,
+        builder: (cxt) {
+          return SimpleDialog(
+            title: Text(
+              'Delete this post?',
+            ),
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context);
+                  deletePost();
+                },
+                child: Text(
+                  'Delete',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              SimpleDialogOption(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.red),
+                  ))
+            ],
+          );
+        });
+  }
+
   FutureBuilder buildPostHeader() {
     return FutureBuilder(
       future: userRef.document(ownerId).get(),
@@ -173,6 +237,7 @@ class _PostState extends State<Post> {
         }
 
         User user = User.fromDocument(snapshot.data);
+        bool isPostOwner = currentUserId == ownerId;
         return ListTile(
           leading: CircleAvatar(
             backgroundImage: CachedNetworkImageProvider(user.photoUrl),
@@ -187,10 +252,12 @@ class _PostState extends State<Post> {
             onTap: () => showProfile(context, profileId: user.id),
           ),
           subtitle: Text(location),
-          trailing: IconButton(
-            onPressed: () => print('deleting post'),
-            icon: Icon(Icons.more_vert),
-          ),
+          trailing: isPostOwner
+              ? IconButton(
+                  onPressed: () => onDeletePost(context),
+                  icon: Icon(Icons.more_vert),
+                )
+              : Text(''),
         );
       },
     );
