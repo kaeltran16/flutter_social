@@ -51,9 +51,9 @@ class _HomeState extends State<Home> {
     });
   }
 
-  onGoogleSignIn(GoogleSignInAccount account) {
+  onGoogleSignIn(GoogleSignInAccount account) async {
     if (account != null) {
-      createUserInFireStore();
+      await createUserInFireStore();
       setState(() {
         isAuth = true;
       });
